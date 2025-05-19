@@ -1,24 +1,14 @@
-import nibabel as nib
-import numpy as np
-import os
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, accuracy_score
 
-def load_mri_image(file_path):
-    img = nib.load(file_path)
-    data = img.get_fdata()
-    return data
+def train_model(X, y, test_size=0.2, random_state=42):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
+    clf = RandomForestClassifier(n_estimators=100, random_state=random_state)
+    clf.fit(X_train, y_train)
+    return clf, X_test, y_test
 
-def normalize_and_flatten(data):
-    if np.max(data) > 0:
-        data = data / np.max(data)
-    return data.flatten()
-
-def load_dataset(mri_dir, labels_dict):
-    X = []
-    y = []
-    for fname in os.listdir(mri_dir):
-        if fname.endswith(".nii") or fname.endswith(".nii.gz"):
-            full_path = os.path.join(mri_dir, fname)
-            img_data = load_mri_image(full_path)
-            X.append(normalize_and_flatten(img_data))
-            y.append(labels_dict.get(fname, 0))  # default label is 0 (control)
-    return np.array(X), np.array(y)
+def evaluate_model(clf, X_test, y_test):
+    y_pred = clf.predict(X_test)
+    print("Accuracy:", accuracy_score(y_test, y_pred))
+    print("Classification Report:\n", classification_report(y_test, y_pred))

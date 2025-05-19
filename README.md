@@ -14,5 +14,15 @@ A machine learning project to assist in optimizing electrode placement in DBS pr
 - `data/`: Expected structure for T1 scans
 - `atlas/`: Reference atlas information
 
+## Neuroimaging Resources
+
+This project references the following brain atlas:
+
+- [Harvard-Oxford Cortical and Subcortical Structural Atlases](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Atlases)
+  - Provided by the FMRIB Software Library (FSL)
+  - Used for identifying regions such as the substantia nigra, thalamus, and basal ganglia
+- [ITK-SNAP](http://www.itksnap.org/pmwiki/pmwiki.php)
+  - Used for manual and semi-automatic segmentation of T1-weighted MRI scans
+
 ## Notes
 This repository is for documentation/reference purposes and does not contain medical advice or deployable clinical tools.

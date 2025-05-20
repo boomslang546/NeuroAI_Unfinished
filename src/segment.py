@@ -1,5 +1,3 @@
-# Placeholder for segmentation logic.
-
 # In this project, ITK-SNAP was planned to be used for manual or semi-automated
 # segmentation of key brain regions such as:
 # - Substantia Nigra
